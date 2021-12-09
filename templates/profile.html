@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="user">
+        <div class="details">
+            <ul>
+                <li>
+                    <span>Name&nbsp;&nbsp;</span>
+                    <span>{{user.username}}</span>
+                </li>
+                <li>
+                    <span>Email&nbsp;&nbsp;</span>
+                    <span>{{user.email}}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="logout">
+            <a href="{{url_for('logout')}}"><button class="btn">Log out</button></a>
+            <a href="{{url_for('events',id='dashboard')}}"><button class="btn">Event dashboard</button></a>
+        </div>
+        {% if user.username=="admin" %}
+        <div class="event-form">
+            <form action="{{url_for('profile',usr='admin')}}" method="post">
+                <label for="event">Event name</label>
+                <input type="text" name="event">
+                <input type="submit" value="Add event" class="btn">
+            </form>
+        </div>
+        {% endif %}
+        <div class="events">
+            <ul>
+                {% for event in events%}
+                <li>{{event}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

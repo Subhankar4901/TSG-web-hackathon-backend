@@ -9,8 +9,9 @@ app=Flask(__name__)
 # configuration of mail
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'ecestudent928@gmail.com'
-app.config['MAIL_PASSWORD'] = 'VN%u8F/LL_bnf/J/'
+app.config['MAIL_USERNAME'] = config("email_sender")
+app.config['MAIL_PASSWORD'] = config("email_password")
+app.config["MAIL_DEFAULT_SENDER"]=config("email_sender")
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 

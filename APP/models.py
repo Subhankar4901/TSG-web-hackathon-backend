@@ -36,7 +36,7 @@ class Event(db.Model):
         '''
     __tablename__="event"
     id=db.Column(db.Integer,primary_key=True)
-    title=db.Column(db.Sting(100))
+    title=db.Column(db.String(100))
     description=db.Column(db.Text)
     poster=db.Column(db.LargeBinary)
     vaenue=db.Column(db.String(200))
@@ -61,9 +61,9 @@ class Achievement(db.Model):
     certificate=db.Column(db.LargeBinary)
 
 # Assosiation table to model the many-many relationship of User and Event
-user_event_assosiation=db.Table(db.Table("user_event",
+user_event_assosiation=db.Table("user_event",
                                 db.Column("user_id",db.Integer,db.ForeignKey('user.id')),
-                                db.Column("event_id",db.Integer,db.ForeignKey('event.id'))))
+                                db.Column("event_id",db.Integer,db.ForeignKey('event.id')))
      
     
     

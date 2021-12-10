@@ -3,7 +3,7 @@ from ..models import User
 from ..utils.jwt import JWT
 from ..utils.idType import parse_id
 import bcrypt
-user=Blueprint('user',__name__)
+user=Blueprint('user',__name__,url_prefix="/user")
 # For login users.
 @user.route('/login',methods=['POST'])
 def login():

@@ -1,11 +1,12 @@
 from flask import Blueprint,request,make_response,jsonify
-from ..models import User
-from ..utils.jwt import JWT
-from ..utils.idType import parse_id
+from ...models import User
+from ...utils.jwt import JWT
+from ...utils.idType import parse_id
 import bcrypt
-user=Blueprint('user',__name__,url_prefix="/user")
+
+login_bp=Blueprint('login',__name__,url_prefix="/login")
 # For login users.
-@user.route('/login',methods=['POST'])
+@login_bp.route('/',methods=['POST'])
 def login():
     data=request.get_json()
     identifier=data["user"]
@@ -36,7 +37,3 @@ def login():
         resp.headers.add("Content-Type","aplication/json")
         return resp
 
-#For register users.
-@user.route('/signup',methods=['POST'])
-def signup():
-    pass

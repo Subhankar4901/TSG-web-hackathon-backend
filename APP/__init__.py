@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from decouple import config
 from flask_mail import Mail, Message
 
+
 # Main application and configuration
 app=Flask(__name__)
 
@@ -24,3 +25,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Database
 db=SQLAlchemy(app)
+from .users.routes import user
+
+app.register_blueprint(user)

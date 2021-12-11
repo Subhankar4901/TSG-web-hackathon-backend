@@ -22,7 +22,7 @@ def login():
         user_obj=User.query.filter_by(username=identifier).first()
     if user_obj:
         if bcrypt.checkpw(password=password.encode("utf-8"),hashed_password=user_obj.password):
-            resp=make_response(jsonify(response=1,token=JWT.tokenizer({"user_id":user_obj.id,"type":user.type})))
+            resp=make_response(jsonify(response=1,token=JWT.tokenizer({"user_id":user_obj.id,"type":user_obj.type})))
             resp.status_code=200
             resp.headers.add("Content-Type","aplication/json")
             return resp

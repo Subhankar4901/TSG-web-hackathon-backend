@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, jsonify,request
 from ....utils.sendEmail import sendEmail
 from random import randint
 
@@ -13,4 +13,7 @@ def sendotp():
     message_subject = f"OTP subject"
     message_body = f"OTP is {randint(100000, 999999)}"
     sendEmail(messageSubject=message_subject, messageBody=message_body, recipients=[user_email])
-    return "OTP sent successfully"
+    response = {
+        "message": "OTP sent successfully"
+    }
+    return jsonify(response)

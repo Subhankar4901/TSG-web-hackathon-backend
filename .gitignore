@@ -4,3 +4,4 @@ pyvenv.cfg
 Scripts
 Lib
 venv/
+**/.DS_Store

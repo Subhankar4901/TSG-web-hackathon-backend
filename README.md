@@ -11,6 +11,13 @@ Problem statement : [Drive link](https://drive.google.com/file/d/1Hmfomj7pa0o8AZ
 
 ---
 
+## Contribution
+
+Make a new branch for each issue and then open pull request to check if there is any conflict.
+Then merge.
+
+---
+
 ## Our backend Team
 
 | Name | Position | Contact |

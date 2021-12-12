@@ -26,6 +26,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Database
 db=SQLAlchemy(app)
 
-from .users.blueprints import users_bp
+from .routes import base_bp
 
-app.register_blueprint(users_bp)
+app.register_blueprint(base_bp)

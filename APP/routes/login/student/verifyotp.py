@@ -11,7 +11,8 @@ def verifyotp():
 	user_email = data["email"]
 	user_otp = data["otp"]
 	valid_time = 5 # in minutes
-	saved_data = OTP.query.filter(OTP.email == user_email).first()
+	saved_data = OTP.query.filter_by(email=user_email).first()
+	# saved_data = False
 	if not saved_data:
 		resp=make_response(jsonify({"message":"invalid access"}))
 		resp.headers.add("Content-Type","aplication/json")

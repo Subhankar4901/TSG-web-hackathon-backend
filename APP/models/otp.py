@@ -11,4 +11,4 @@ class OTP(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     email=db.Column(db.String(100))
     otp=db.Column(db.Integer)
-    time=db.Column(db.Integer)
+    unixTimeStamp=db.Column(db.Integer)

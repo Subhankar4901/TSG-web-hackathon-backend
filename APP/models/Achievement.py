@@ -12,6 +12,6 @@ class Achievement(db.Model):
     __tablename__='achievement'
     id=db.Column(db.Integer,primary_key=True)
     user=db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) # Refrence to user 
-    event=db.Column(db.Integer,db.ForeignKey('event.id'),nullable=False) # Reference to event
+    event_id=db.Column(db.Integer,db.ForeignKey('event.id'),nullable=False) # Reference to event
     position=db.Column(db.Integer) 
     certificate=db.Column(db.LargeBinary)

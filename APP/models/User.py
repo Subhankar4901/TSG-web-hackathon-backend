@@ -21,4 +21,4 @@ class User(db.Model):
     events_organised=db.relationship('Event',backref=db.backref('organiser',lazy=True)) # one-many relationship with event
     achievements=db.relationship('Achievement',backref=db.backref('achiever',lazy=True)) # one-many relationship with achievements
     hall=db.Column(db.String(10))
-    complaints=db.relationship('Complain',backref=db.backref("user",lazy=True))
+    #complaints=db.relationship('Complain',backref=db.backref("user",lazy=True))

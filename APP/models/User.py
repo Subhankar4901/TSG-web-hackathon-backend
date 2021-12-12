@@ -21,7 +21,7 @@ class User(db.Model):
     type=db.Column(db.Integer)
     password=db.Column(db.String(100))
     events_participated=db.relationship('Event',secondary="user_event",backref=db.backref('participants',lazy=True)) # many-many relationship with event.
-    events_organised=db.relationship('Event',backref=db.backref('orgaiser',lazy=True)) # one-many relationship with event
+    events_organised=db.relationship('Event',backref=db.backref('organiser',lazy=True)) # one-many relationship with event
     achievements=db.relationship('Achievement',backref=db.backref('achiever',lazy=True)) # one-many relationship with achievements
     hall=db.Column(db.String(10))
     complaints=db.relationship('Complain',backref=db.backref("user",lazy=True))

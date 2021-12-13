@@ -5,7 +5,7 @@ class Achievement(db.Model):
       Create a achievement object and save it to database.
     Example :
     
-    >>> achievement=Achievement(user:int,event:int,position:int,certificate:str)
+    >>> achievement=Achievement(user=int,event=int,position=int,certificate=str)
     >>> db.session.add(event)
     >>> db.session.commit()
     '''

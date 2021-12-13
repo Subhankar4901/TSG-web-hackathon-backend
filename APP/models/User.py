@@ -5,8 +5,8 @@ class User(db.Model):
     Create a user object and save it to database.
     Example :
     
-    >>> user=User(name:str,username:str,insti_email:str,email:str,
-            photo:str,type:int,password:bytes,hall:str)
+    >>> user=User(name=str,username=str,insti_email=str,email=str,
+            photo=str,type=int,password=bytes,hall=str)
     >>> db.session.add(user)
     >>> db.session.commit()
         '''

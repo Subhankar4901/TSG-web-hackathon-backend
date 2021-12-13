@@ -3,7 +3,7 @@ class OTP(db.Model):
     '''
     Create a OTP object and save it to database.
     
-    >>> otp=OTP(email:str,otp:int,time:int)
+    >>> otp=OTP(email=str,otp=int,unixTimeStamp=float)
     >>> db.session.add(otp)
     >>> db.session.commit() 
     '''

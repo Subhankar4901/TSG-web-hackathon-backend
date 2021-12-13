@@ -5,8 +5,8 @@ class Event(db.Model):
     Create a event object and save it to database.
     Example :
     
-    >>> event=Event(title:str,description:str,poster:str,venue:str,
-            start:str,end:str,report:str)
+    >>> event=Event(title=str,description=str,poster=str,venue=str,
+            start=str,end=str,report=str)
     >>> db.session.add(event)
     >>> db.session.commit()
         '''
@@ -20,3 +20,4 @@ class Event(db.Model):
     end=db.Column(db.String(50))
     achievements=db.relationship('Achievement',backref=db.backref('event',lazy=True))
     report=db.Column(db.LargeBinary)
+    organizer_id=db.Column (db. Integer, db. ForeignKey("user.id"))

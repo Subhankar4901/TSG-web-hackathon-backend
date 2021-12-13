@@ -20,7 +20,7 @@ app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
 app.secret_key=config("app_secret_key")
-app.config["SQLALCHEMY_DATABASE_URI"]=f"mysql://{config('dbUser')}:{config('dbPassword')}@{config('dbHost')}/{config('dbName')}"
+app.config["SQLALCHEMY_DATABASE_URI"]=config("db_URI")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Database

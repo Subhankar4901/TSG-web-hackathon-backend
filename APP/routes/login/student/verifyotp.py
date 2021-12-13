@@ -32,13 +32,14 @@ def verifyotp():
 			resp=make_response(jsonify({"message":"user verified"}))
 			resp.headers.add("Content-Type","aplication/json")
 			resp.status_code=200
+
+		db.session.delete(saved_data)
+		db.session.commit()
 	else:
 		resp=make_response(jsonify({"message":"otp invalid"}))
 		resp.headers.add("Content-Type","aplication/json")
 		resp.status_code=401
 
-	db.session.delete(saved_data)
-	db.session.commit()
 	return resp
 	
 

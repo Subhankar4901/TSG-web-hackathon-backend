@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from decouple import config
 from flask_mail import Mail, Message
-
+from flask_migrate import Migrate
 
 # Main application and configuration
 app=Flask(__name__)
@@ -25,6 +25,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Database
 db=SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 from .routes import base_bp
 

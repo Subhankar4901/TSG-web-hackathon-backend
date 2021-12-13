@@ -18,6 +18,21 @@ Then merge.
 
 ---
 
+## APIs
+
+The list of APIs are -
+
+```
+1. /login/student/sendotp -
+	desc: sends otp to spec email.
+	request: {"email": ""}
+	response: {"message": ""}
+
+2. 
+```
+
+---
+
 ## Our backend Team
 
 | Name | Position | Contact |

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,url_for
 from flask_sqlalchemy import SQLAlchemy
 from decouple import config
 from flask_mail import Mail, Message
@@ -29,4 +29,14 @@ migrate = Migrate(app, db)
 
 from .routes import base_bp
 
+#This below route is for visualising url paths.Only for development purposes
 app.register_blueprint(base_bp)
+@app.route("/map")
+def get_map():
+    data={}
+    for rule in app.url_map.iter_rules():
+        try:
+            data[str(rule.endpoint)]=str(url_for(rule.endpoint))
+        except:
+            pass
+    return data

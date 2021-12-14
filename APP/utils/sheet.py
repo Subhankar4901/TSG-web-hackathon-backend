@@ -2,6 +2,7 @@ import csv
 import os
 from ..models import User
 from .. import db
+from .official_type import parse_official_type
 
 class Sheet:
     official_sheet=os.path.join(os.path.join(os.getcwd(),"docs"),"official.csv")
@@ -14,7 +15,7 @@ class Sheet:
         for row in student_reader:
             user = User.query.filter_by(email=row[0]).first()
             if not user:
-                user = User(email=row[0], name=row[1], roll=row[2])
+                user = User(email=row[0], name=row[1], roll=row[2], type=4)
                 db.session.add(user)
                 db.session.commit()
         f.close()
@@ -26,7 +27,7 @@ class Sheet:
         for row in official_reader:
             user = User.query.filter_by(email=row[0]).first()
             if not user:
-                user = User(username=row[0], password=row[1], email=row[2], name=row[3])
+                user = User(username=row[0], password=row[1], email=row[2], name=row[3], type=parse_official_type(row[0]))
                 db.session.add(user)
                 db.session.commit()
         f.close()

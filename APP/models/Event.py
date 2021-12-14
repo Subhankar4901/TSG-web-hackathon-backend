@@ -13,11 +13,17 @@ class Event(db.Model):
     __tablename__="event"
     id=db.Column(db.Integer,primary_key=True)
     title=db.Column(db.String(100))
-    description=db.Column(db.Text)
+    introduction=db.Column(db.Text)
+    procedure=db.Column(db.Text)
+    jugde_criteria=db.Column(db.Text)
+    timeline = db.Column(db.Text) # timeline in form of comma separated strings
     poster=db.Column(db.LargeBinary)
-    vaenue=db.Column(db.String(200))
+    venue=db.Column(db.String(200))
     start=db.Column(db.String(50))
     end=db.Column(db.String(50))
     achievements=db.relationship('Achievement',backref=db.backref('event',lazy=True))
     report=db.Column(db.LargeBinary)
-    organizer_id=db.Column (db. Integer, db. ForeignKey("user.id"))
+    organizer_id=db.Column (db.Integer, db.ForeignKey("user.id"))
+    type=db.Column(db.String(100)) # type = "Technology, Social and Culture, Sports and Games, Students' Welfare, "
+    event_tags=db.Column(db.String(100)) # "Inter IIT, General Championship or None"
+    participation_certificate=db.Column(db.LargeBinary) # participation certificate 

@@ -31,12 +31,12 @@ def auth():
 			return resp
 		else:
 			resp=make_response(jsonify(message="password invalid"))
-			resp.status_code=200
+			resp.status_code=401
 			resp.headers.add("Content-Type","aplication/json")
 			return resp
 	else:
 		resp=make_response(jsonify(message="username invalid"))
-		resp.status_code=200
+		resp.status_code=401
 		resp.headers.add("Content-Type","aplication/json")
 		return resp
 		

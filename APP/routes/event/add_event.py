@@ -3,32 +3,34 @@ from ...models.Event import Event
 from ...models.User import User
 from ... import db
 from ...utils.jwt import JWT
+
 add_event_bp=Blueprint("add_event",__name__,url_prefix="/add_event")
-@add_event_bp.route("/",methods=["GET","POST"])
+@add_event_bp.route("/",methods=["POST"])
 def add_event():
-    if request.method=="GET":
-        return "hELLO"
     data=request.get_json()
-    token=data["token"]
+    token=data.get("token")
     token_dict=JWT.validator(token)
     if token_dict:
-        organiser=User.query.filter_by(id=token_dict["user_id"]).first()
+        organiser=User.query.filter_by(id=token_dict.get("id")).first()
         event=Event(
-            title=data["title"],
-            introduction=data["introduction"],
-            procedure=data["procedure"],
-            jugde_criteria=data["jugde_criteria"],
-            timeline=data["timeline"],
-            venue=data["venue"],
-            start=data["start"],
-            end=data["end"],
+            title=data.get("title"),
+            introduction=data.get("introduction"),
+            procedure=data.get("procedure"),
+            jugde_criteria=data.get("jugde_criteria"),
+            timeline=data.get("timeline"),
+            venue=data.get("venue"),
+            start=data.get("start"),
+            end=data.get("end"),
             organiser=organiser,
-            event_tags=data["tags"],
-            type=data["type"]
+            event_tags=data.get("tags"),
+            type=data.get("type"),
+            report=bytes(data.get("report"),"utf8"),
+            poster=bytes(data.get("poster"),"utf8"),
+            participation_certificate=bytes(data.get("participation_certificate"),"utf8")
         )
         db.session.add(event)
         db.session.commit()
-        return make_response(jsonify(messege="Event added"))
+        return make_response(jsonify(message="Event added"))
     else:
         resp=make_response(jsonify(message="Unauthorised"))
         resp.status_code=401

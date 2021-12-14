@@ -1,9 +1,10 @@
 from flask import Blueprint, jsonify
 from ...models.Event import Event
 from datetime import datetime
-from .event import event_bp
 
-@event_bp.route('/basic_details',methods=['GET'])
+view_curr_events_bp = Blueprint("view_curr_events",__name__,url_prefix="/curr_events")
+
+@view_curr_events_bp.route('/basic_details',methods=['GET'])
 def events_basic_details():
     events = Event.query.all()
     current = []

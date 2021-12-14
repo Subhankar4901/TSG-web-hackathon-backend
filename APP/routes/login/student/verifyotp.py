@@ -22,7 +22,6 @@ def verifyotp():
 		return resp
 	
 	timeDelta = datetime.now() - datetime.fromtimestamp(saved_data.unixTimeStamp)
-	resp = make_response()
 
 	if (saved_data.otp == user_otp):
 		if (timeDelta.total_seconds() > valid_time*60):
@@ -31,9 +30,14 @@ def verifyotp():
 			resp.status_code=401
 		else:
 			user = User.query.filter_by(email=user_email).first()
-			resp=make_response(jsonify(message="user authenticated", token=JWT.tokenizer({"user_id":user.id,"type":user.type})))
-			resp.headers.add("Content-Type","aplication/json")
-			resp.status_code=200
+			if user:
+				resp=make_response(jsonify(message="user authenticated", token=JWT.tokenizer({"user_id":user.id,"type":user.type})))
+				resp.headers.add("Content-Type","aplication/json")
+				resp.status_code=200
+			else:
+				resp=make_response(jsonify({"message":"user not found"}))
+				resp.headers.add("Content-Type","aplication/json")
+				resp.status_code=404
 
 		db.session.delete(saved_data)
 		db.session.commit()

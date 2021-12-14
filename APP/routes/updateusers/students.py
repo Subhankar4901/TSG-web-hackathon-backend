@@ -8,8 +8,13 @@ students_bp=Blueprint('students',__name__,url_prefix="/students")
 # login required of officials
 @students_bp.route('/',methods=['POST'])
 def updateStudents():
-	data=request.get_json()
+	data = request.get_json()
+
+	if not "token" in data:
+		return make_response(jsonify({"message":"Unauthorized access."}), 401)
+
 	userData = JWT.validator(data["token"])
+
 	if (not userData) or (User.query.filter_by(id=userData["id"]).first().type != 1):
 		return make_response(jsonify({"message":"Unauthorized access."}), 401)
 

@@ -5,7 +5,8 @@ from ...models.User import User
 # request has token in body
 # response is achievements of student
 student_bp=Blueprint("student_achievemens",__name__,url_prefix="/student")
-@student_bp.route("/getAchievements")
+@student_bp.route("/getAchievements/", methods=["POST"])
+@student_bp.route("/getAchievements", methods=["POST"])
 def getAchievements():
     token=request.get_json().get("token")
     token_dict=JWT.validator(token)

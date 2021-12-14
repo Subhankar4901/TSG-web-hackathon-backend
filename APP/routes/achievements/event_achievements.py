@@ -6,7 +6,8 @@ from ...utils.jwt import JWT
 # request contains token and event_id
 # response is the list of achievements
 event_bp=Blueprint("event_achievements",__name__,url_prefix="/event")
-@event_bp.route("/getAchievements")
+@event_bp.route("/getAchievements/", methods=["POST"])
+@event_bp.route("/getAchievements", methods=["POST"])
 def getAchievements():
     data=request.get_json()
     token=data.get("token")

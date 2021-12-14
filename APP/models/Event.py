@@ -23,4 +23,4 @@ class Event(db.Model):
     end=db.Column(db.String(50))
     achievements=db.relationship('Achievement',backref=db.backref('event',lazy=True))
     report=db.Column(db.LargeBinary)
-    organizer_id=db.Column (db. Integer, db. ForeignKey("user.id"))
+    organizer_id=db.Column (db.Integer, db.ForeignKey("user.id"))

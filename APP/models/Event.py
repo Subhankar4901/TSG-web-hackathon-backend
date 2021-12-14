@@ -26,3 +26,4 @@ class Event(db.Model):
     organizer_id=db.Column (db. Integer, db. ForeignKey("user.id"))
     type=db.Column(db.String(100)) # type = "Technology, Social and Culture, Sports and Games, Students' Welfare, "
     event_tags=db.Column(db.String(100)) # "Inter IIT, General Championship or None"
+    participation_certificate=db.Column(db.LargeBinary) # participation certificate 

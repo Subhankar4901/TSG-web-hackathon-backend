@@ -24,3 +24,4 @@ class Event(db.Model):
     achievements=db.relationship('Achievement',backref=db.backref('event',lazy=True))
     report=db.Column(db.LargeBinary)
     organizer_id=db.Column (db. Integer, db. ForeignKey("user.id"))
+    event_type=db.Column(db.String(20)) # type = "Technology, Social and Culture, Sports and Games, Students' Welfare, "

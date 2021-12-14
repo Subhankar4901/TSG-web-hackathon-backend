@@ -31,7 +31,7 @@ def verifyotp():
 		else:
 			user = User.query.filter_by(email=user_email).first()
 			if user:
-				resp=make_response(jsonify(message="user authenticated", token=JWT.tokenizer({"user_id":user.id,"type":user.type})))
+				resp=make_response(jsonify(message="user authenticated", token=JWT.tokenizer({"id":user.id,"type":user.type})))
 				resp.headers.add("Content-Type","aplication/json")
 				resp.status_code=200
 			else:

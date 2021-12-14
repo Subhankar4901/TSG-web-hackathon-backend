@@ -13,9 +13,10 @@ sendotp_bp = Blueprint('sendotp', __name__, url_prefix="/sendotp")
 def sendotp():
     data = request.get_json()
     user_email = data["email"]
-    message_subject = f"OTP subject"
+    message_subject = f"OTP for login"
     otp = randint(100000, 999999)
-    message_body = f"OTP is {otp}"
+    valid_time = 5 #in minutes
+    message_body = f"OTP is {otp}. It is valid for {valid_time} minutes only."
     sendEmail(messageSubject=message_subject, messageBody=message_body, recipients=[user_email])
     response = {
         "message": "OTP sent successfully"

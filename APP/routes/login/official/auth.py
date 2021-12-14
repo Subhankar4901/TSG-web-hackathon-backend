@@ -25,17 +25,17 @@ def auth():
 	user_obj=User.query.filter_by(username=user).first()
 	if user_obj:
 		if password == user_obj.password:
-			resp=make_response(jsonify(response=1,token=JWT.tokenizer({"user_id":user_obj.id,"type":user_obj.type, "username": user})))
+			resp=make_response(jsonify(message="user authenticated",token=JWT.tokenizer({"user_id":user_obj.id,"type":user_obj.type, "username": user})))
 			resp.status_code=200
 			resp.headers.add("Content-Type","aplication/json")
 			return resp
 		else:
-			resp=make_response(jsonify(response=0))
+			resp=make_response(jsonify(message="password invalid"))
 			resp.status_code=200
 			resp.headers.add("Content-Type","aplication/json")
 			return resp
 	else:
-		resp=make_response(jsonify(response=-1))
+		resp=make_response(jsonify(message="username invalid"))
 		resp.status_code=200
 		resp.headers.add("Content-Type","aplication/json")
 		return resp

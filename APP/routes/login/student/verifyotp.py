@@ -1,7 +1,8 @@
 from flask import Blueprint, request, make_response, jsonify
-from ....models import OTP
+from ....models import OTP, User
 from datetime import datetime
 from .... import db
+from ....utils.jwt import JWT
 
 verifyotp_bp = Blueprint('verifyotp', __name__, url_prefix="/verifyotp")
 
@@ -29,7 +30,8 @@ def verifyotp():
 			resp.headers.add("Content-Type","aplication/json")
 			resp.status_code=401
 		else:
-			resp=make_response(jsonify({"message":"user verified"}))
+			user = User.query.filter_by(email=user_email).first()
+			resp=make_response(jsonify(message="user authenticated", token=JWT.tokenizer({"user_id":user.id,"type":user.type})))
 			resp.headers.add("Content-Type","aplication/json")
 			resp.status_code=200
 

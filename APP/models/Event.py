@@ -23,10 +23,6 @@ class Event(db.Model):
     end=db.Column(db.String(50))
     achievements=db.relationship('Achievement',backref=db.backref('event',lazy=True))
     report=db.Column(db.LargeBinary)
-<<<<<<< HEAD
     organizer_id=db.Column (db.Integer, db.ForeignKey("user.id"))
-=======
-    organizer_id=db.Column (db. Integer, db. ForeignKey("user.id"))
     type=db.Column(db.String(100)) # type = "Technology, Social and Culture, Sports and Games, Students' Welfare, "
     event_tags=db.Column(db.String(100)) # "Inter IIT, General Championship or None"
->>>>>>> f492ce1313d1bf3bb1124b23731612e5ff50084f

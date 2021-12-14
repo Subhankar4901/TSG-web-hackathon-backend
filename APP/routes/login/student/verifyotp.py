@@ -21,7 +21,7 @@ def verifyotp():
 		resp.status_code=401
 		return resp
 	
-	timeDelta = datetime.now() - datetime.fromtimestamp(saved_data.unixTimeStamp)
+	timeDelta = datetime.now() - saved_data.time
 
 	if (saved_data.otp == user_otp):
 		if (timeDelta.total_seconds() > valid_time*60):
@@ -31,7 +31,7 @@ def verifyotp():
 		else:
 			user = User.query.filter_by(email=user_email).first()
 			if user:
-				resp=make_response(jsonify(message="user authenticated", token=JWT.tokenizer({"user_id":user.id,"type":user.type})))
+				resp=make_response(jsonify(message="user authenticated", token=JWT.tokenizer({"id":user.id,"type":user.type})))
 				resp.headers.add("Content-Type","aplication/json")
 				resp.status_code=200
 			else:

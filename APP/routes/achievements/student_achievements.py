@@ -14,6 +14,8 @@ def getAchievements():
                 "id":achievement.id,
                 "event_id":achievement.event.id,
                 "event_title":achievement.event.title,
+                "event_type":achievement.event.type,
+                "event_tags":achievement.event.event_tags,
                 "position":achievement.position
             })
         resp=make_response(jsonify(response=achivements))

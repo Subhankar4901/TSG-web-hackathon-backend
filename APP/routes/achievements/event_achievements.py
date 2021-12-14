@@ -9,7 +9,7 @@ def getAchievements():
     event_id=request.args.get("event_id")
     token_dict=JWT.validator(token)
     if token_dict:
-        event:Event=Event.query.filter_by(id=event_id).first()
+        event=Event.query.filter_by(id=event_id).first()
         if token_dict["type"]<3:
             achievements=[]
             for achievement in event.achievements:
@@ -17,6 +17,8 @@ def getAchievements():
                     "id":achievement.id,
                     "event_id":event_id,
                     "event_title":event.title,
+                    "event_type":event.type,
+                    "event_tags":event.event_tags.split(","),
                     "user_id":achievement.user,
                     "user_name":achievement.achiever.name,
                     "position": achievement.position

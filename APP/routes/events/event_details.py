@@ -10,7 +10,7 @@ info_bp=Blueprint("info",__name__,url_prefix="/")
 @info_bp.route("<event_id>/info/")
 @info_bp.route("<event_id>/info")
 def getAchievements(event_id):
-    token = request.args.gettoken
+    token = request.args.get("token")
     token_dict = JWT.validator(token)
 
     if token_dict:

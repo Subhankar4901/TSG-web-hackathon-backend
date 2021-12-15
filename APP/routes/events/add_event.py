@@ -7,6 +7,7 @@ import datetime
 
 add_event_bp=Blueprint("add_event",__name__,url_prefix="/add_event")
 @add_event_bp.route("/",methods=["POST"])
+@add_event_bp.route("",methods=["POST"])
 def add_event():
     data=request.get_json()
     token=data.get("token")

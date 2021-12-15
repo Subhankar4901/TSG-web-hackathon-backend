@@ -1,6 +1,5 @@
 from flask import Blueprint,jsonify,make_response,request
 from ...models.Event import Event
-from ...utils.jwt import JWT
 
 achievements_bp=Blueprint("achievements",__name__,url_prefix="/")
 
@@ -12,12 +11,11 @@ achievements_bp=Blueprint("achievements",__name__,url_prefix="/")
 def getAchievements(event_id):
     token=request.args.get("token")
     event=Event.query.get(event_id)
-    token_dict=JWT.validator(token)
     achievements=[]
     for achievement in event.achievements:
         achievements.append({
             "id":achievement.id,
-            "user_name":achievement.achiever.name,
+            "winner_name":achievement.achiever.name,
             "position": achievement.position
         })
     resp=make_response(jsonify(achievements=achievements))

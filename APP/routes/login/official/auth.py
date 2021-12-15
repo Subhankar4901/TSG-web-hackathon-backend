@@ -33,7 +33,7 @@ def auth():
 	user_obj=User.query.filter_by(username=user).first()
 	if user_obj:
 		if password == user_obj.password:
-			resp=make_response(jsonify(message="user authenticated",token=JWT.tokenizer({"id":user_obj.id,"type":user_obj.type, "username": user})))
+			resp=make_response(jsonify(message="user authenticated",token=JWT.tokenizer({"id":user_obj.id,"type":user_obj.type, "username": user}), user_type=user_obj.type))
 			resp.status_code=200
 			resp.headers.add("Content-Type","aplication/json")
 			return resp

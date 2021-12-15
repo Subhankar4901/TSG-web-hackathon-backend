@@ -3,6 +3,7 @@ from .User import User
 from .Event import Event
 from .. import db
 from .otp import OTP
+from .Complain import Complain
 
 # relations
 # Association table to model the many-many relationship of User and Event

@@ -29,4 +29,4 @@ class User(db.Model):
     achievements=db.relationship('Achievement',backref=db.backref('achiever',lazy=True)) # one-many relationship with achievements
     hall=db.Column(db.String(10))
     password=db.Column(db.String(20))
-    #complaints=db.relationship('Complain',backref=db.backref("user",lazy=True))
+    complaints=db.relationship('Complain',backref=db.backref("user",lazy=True))

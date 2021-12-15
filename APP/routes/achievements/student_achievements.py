@@ -2,13 +2,12 @@ from flask import Blueprint,request,make_response,jsonify
 from ...utils.jwt import JWT
 from ...models.User import User
 
-# request has token in body
+# request has token query parameters
 # response is achievements of student
-student_bp=Blueprint("student_achievemens",__name__,url_prefix="/student")
-@student_bp.route("/getAchievements/", methods=["POST"])
-@student_bp.route("/getAchievements", methods=["POST"])
+student_bp=Blueprint("student_achievements",__name__,url_prefix="/student")
+@student_bp.route("/getAchievements")
 def getAchievements():
-    token=request.get_json().get("token")
+    token=request.args.get("token")
     token_dict=JWT.validator(token)
     if token_dict:
         user=User.query.filter_by(id=token_dict["id"]).first()
@@ -23,13 +22,14 @@ def getAchievements():
                 "position":achievement.position,
                 'start':str(achievement.event.start),
                 'end':str(achievement.event.end),
+                'certificate':achievement.certificate.decode('utf-8')
             })
         resp=make_response(jsonify(achievements=achievements))
         resp.status_code=200
         resp.content_type="application/json"
         return resp
     else:
-        resp=make_response(jsonify(message="Unauthorised"))
+        resp=make_response(jsonify(message="Unauthorised access"))
         resp.status_code=401
         resp.content_type="application/json"
         return resp    

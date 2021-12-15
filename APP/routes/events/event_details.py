@@ -24,11 +24,11 @@ def getAchievements(event_id):
             venue=event.venue,
             start=str(event.start),
             end=str(event.end),
-            organiser=event.organiser,
-            event_tags=event.tags,
+            organiser=event.organiser.name,
+            event_tags=event.event_tags,
             type=event.type,
             report=event.report.decode('utf-8'),
             poster=event.poster.decode('utf-8')
         ))
-    else:
-        return make_response(jsonify(message="Unauthorized Access"), 401)
+        return resp
+    return make_response(jsonify(message="Unauthorized Access"), 401)

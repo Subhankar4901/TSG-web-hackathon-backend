@@ -14,8 +14,8 @@ def upcoming_events():
             "type":event.type,
             "organiser":event.organiser.name,
             "tag":event.event_tags,
-            "start":event.start,
-            "end":event.end
+            "start":str(event.start),
+            "end":str(event.end)
         })
     return jsonify(events=upcoming)
     

@@ -1,7 +1,7 @@
 from flask import Blueprint, json, request, make_response, jsonify
 from ...models import Complain
 from ...utils.jwt import JWT
-from ...models import Complain
+from ...models import Complain, User
 
 getcomplaints_bp = Blueprint('getcomplaints', __name__, url_prefix="/getcomplaints")
 
@@ -11,7 +11,6 @@ def getcomplaints():
 	token=data.get("token")
 	token_dict=JWT.validator(token)
 
-	# adding admin in database
 	if token_dict:
 		complains = []
 		userType = int(token_dict['type'])
@@ -19,7 +18,8 @@ def getcomplaints():
 		if userType <= 2:
 			complains.extend(list(map(lambda c: c.extractData(), Complain.query.all())))
 		else:
-			complains.extend(list(map(lambda c: c.extractData(), Complain.query.filter_by(userid=userId).all())))
+			user = User.query.get(userId)
+			complains.extend(list(map(lambda c: c.extractData(), user.complaints)))
 		resp=make_response(jsonify(message="Success", complaints = complains))
 		resp.status_code=200
 		return resp

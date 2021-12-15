@@ -17,3 +17,14 @@ class Complain(db.Model):
     description=db.Column(db.Text)
     remarks=db.Column(db.Text)
     attachment=db.Column(db.LargeBinary)
+
+    def extractData(self):
+        data = {
+            "id" : self.id,
+            "userid" : self.userid,
+            "date" : self.date,
+            "description": self.description,
+            "remarks" : self.remarks,
+            "attachment" : self.attachment
+        }
+        return data

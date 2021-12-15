@@ -20,14 +20,7 @@ def getAchievements(event_id):
             "user_name":achievement.achiever.name,
             "position": achievement.position
         })
-    resp=make_response(jsonify(achievements=achievements,
-            event_title=event.title,
-            event_type=event.type,
-            event_tags=event.event_tags.split(","),
-            start=str(event.start),
-            end=str(event.end),
-            event_report=(event.report.decode('utf-8') if token_dict else None)
-            ))
+    resp=make_response(jsonify(achievements=achievements))
     resp.status_code=200
     resp.content_type="application/json"
     return resp

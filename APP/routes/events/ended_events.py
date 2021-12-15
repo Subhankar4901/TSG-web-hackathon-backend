@@ -8,9 +8,9 @@ ended_events_bp=Blueprint("ended_events",__name__,url_prefix="/ended")
 def ended_events():
     t=float(request.args.get("t")) # In days.
     today=datetime.date.today()
-    toady_datetime=datetime.datetime(today.year,today.month,today.day)
-    datetime_before_t_days=toady_datetime-datetime.timedelta(days=t)
-    required_events=Event.query.filter(Event.end>=datetime_before_t_days).filter(Event.end<toady_datetime).all()
+    today_datetime=datetime.datetime(today.year,today.month,today.day)
+    datetime_before_t_days=today_datetime-datetime.timedelta(days=t)
+    required_events=Event.query.filter(Event.end>=datetime_before_t_days).filter(Event.end<today_datetime).all()
     events=[]
     for event in required_events:
         events.append({
@@ -22,7 +22,7 @@ def ended_events():
             "start":event.start,
             "end":event.end
         })
-    resp=make_response(jsonify(response=events))
+    resp=make_response(jsonify(events=events))
     resp.status_code=200
     return resp
     

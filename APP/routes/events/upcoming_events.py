@@ -17,5 +17,5 @@ def upcoming_events():
             "start":event.start,
             "end":event.end
         })
-    return jsonify(response=upcoming)
+    return jsonify(events=upcoming)
     

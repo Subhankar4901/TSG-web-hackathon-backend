@@ -20,8 +20,8 @@ def getAchievements():
                 "event_type":achievement.event.type,
                 "event_tags":achievement.event.event_tags,
                 "position":achievement.position,
-                'start':str(achievement.event.start),
-                'end':str(achievement.event.end),
+                'start':achievement.event.start,
+                'end':achievement.event.end,
                 'certificate':achievement.certificate.decode('utf-8')
             })
         resp=make_response(jsonify(achievements=achievements))

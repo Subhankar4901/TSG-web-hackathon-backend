@@ -19,8 +19,8 @@ def ended_events():
             "organiser":event.organiser.name,
             "type":event.type,
             "tag":event.event_tags,
-            "start":str(event.start),
-            "end":str(event.end)
+            "start":event.start,
+            "end":event.end,
         })
     resp=make_response(jsonify(events=events))
     resp.status_code=200

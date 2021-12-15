@@ -16,8 +16,8 @@ def events_basic_details():
                 'title':event.title,
                 "organiser":event.organiser.name,
                 'type':event.type,
-                "start":str(event.start),
-                "end":str(event.end),
+                "start":event.start,
+                "end":event.end,
                 'event_tags':event.event_tags
             }
         )

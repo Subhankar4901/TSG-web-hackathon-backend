@@ -1,8 +1,10 @@
+from datetime import datetime
 from flask import Flask,url_for
 from flask_sqlalchemy import SQLAlchemy
 from decouple import config
 from flask_mail import Mail, Message
 from flask_migrate import Migrate
+from flask.json import JSONEncoder
 
 # Main application and configuration
 app=Flask(__name__)
@@ -15,7 +17,13 @@ app.config['MAIL_PASSWORD'] = config("email_password")
 app.config["MAIL_DEFAULT_SENDER"]=config("email_sender")
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-
+# Our custom jsonencoder for datetime.
+class CustomJSONEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj,datetime):
+            return obj.isoformat()
+        return super().default(obj)
+app.json_encoder=CustomJSONEncoder
 # instantiate the mail class
 mail = Mail(app)
 

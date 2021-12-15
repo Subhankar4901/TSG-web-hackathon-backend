@@ -49,7 +49,47 @@ The list of APIs are -
 		"type": 4,
 		"username": "tsg_official"
 	}
-3. 
+
+3. complaints/getcomplaints -
+	desc : GET request that returns list of complaints according to access level.
+	Params
+	token : the JWT token with the following payload
+	{
+		"id": 15,
+		"type": 3,
+		"username": "soc_governor"
+	}
+	
+	Response 
+	Successful try (Status 200)
+	{
+    "complaints": [
+			{
+				"attachment": null,
+				"date": "Wed, 15 Dec 2021 14:08:56 GMT",
+				"description": "Can I create a complain",
+				"id": 1, 
+				"remarks": "pending",
+				"userid": 17
+			},
+			{
+				"attachment": null,
+				"date": "Wed, 15 Dec 2021 12:13:29 GMT",
+				"description": "I can't set events",
+				"id": 2,
+				"remarks": "In Review",
+				"userid": 15
+			}
+		],
+		"message": "Success"
+	}
+	
+	Failure try (status 401)
+	{
+		"message": "Unauthorised"
+	}
+	here id in response is the complain id.
+4. 
 
 ```
 

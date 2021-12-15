@@ -43,6 +43,12 @@ The list of APIs are -
 		"message": ""
 	}
 
+	token data format:
+	{
+		"id": 14,
+		"type": 4,
+		"username": "tsg_official"
+	}
 3. 
 
 ```

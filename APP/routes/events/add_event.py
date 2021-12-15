@@ -26,6 +26,7 @@ def add_event():
             event_tags=data.get("tags"),
             type=data.get("type"),
             poster= data.get("poster").encode("ascii") if data.get("poster") else data.get("poster"),
+            participation_certificate=data.get("participation_certificate").encode("ascii") if data.get("participation_certificate") else data.get("participation_certificate")
         )
         db.session.add(event)
         db.session.commit()

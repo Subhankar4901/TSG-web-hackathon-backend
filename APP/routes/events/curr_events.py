@@ -4,6 +4,7 @@ from datetime import datetime
 
 view_curr_events_bp = Blueprint("view_curr_events",__name__,url_prefix="/curr_events")
 
+# datetime is returned as '2021-12-15 12:12:27.893723'
 @view_curr_events_bp.route('/basic_details',methods=['GET'])
 def events_basic_details():
     events = Event.query.all()
@@ -25,8 +26,8 @@ def events_basic_details():
                 # 'timeline':event.timeline.split(','),
                 'poster':event.poster.decode("utf-8"),
                 'venue':event.venue,
-                'start':event.start,
-                'end':event.end,
+                'start':str(event.start),
+                'end':str(event.end),
                 # 'report':event.report,
                 # 'organizer_id':event.organizer_id,
                 'type':event.type,

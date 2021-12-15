@@ -19,8 +19,8 @@ class Event(db.Model):
     timeline = db.Column(db.Text) # timeline in form of comma separated strings
     poster=db.Column(db.LargeBinary)
     venue=db.Column(db.String(200))
-    start=db.Column(db.String(50))
-    end=db.Column(db.String(50))
+    start=db.Column(db.DateTime)
+    end=db.Column(db.DateTime)
     achievements=db.relationship('Achievement',backref=db.backref('event',lazy=True))
     report=db.Column(db.LargeBinary)
     organizer_id=db.Column (db.Integer, db.ForeignKey("user.id"))

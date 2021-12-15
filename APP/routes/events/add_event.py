@@ -3,6 +3,7 @@ from ...models.Event import Event
 from ...models.User import User
 from ... import db
 from ...utils.jwt import JWT
+from datetime import datetime
 
 add_event_bp=Blueprint("add_event",__name__,url_prefix="/add_event")
 @add_event_bp.route("/",methods=["POST"])
@@ -19,8 +20,8 @@ def add_event():
             jugde_criteria=data.get("jugde_criteria"),
             timeline=data.get("timeline"),
             venue=data.get("venue"),
-            start=data.get("start"),
-            end=data.get("end"),
+            start=datetime.fromisoformat(data.get("start")) if data.get("start") else None,
+            end=datetime.fromisoformat(data.get("end")) if data.get("end") else None,
             organiser=organiser,
             event_tags=data.get("tags"),
             type=data.get("type"),

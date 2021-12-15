@@ -20,7 +20,9 @@ def getAchievements():
                 "event_title":achievement.event.title,
                 "event_type":achievement.event.type,
                 "event_tags":achievement.event.event_tags,
-                "position":achievement.position
+                "position":achievement.position,
+                'start':str(achievement.event.start),
+                'end':str(achievement.event.end),
             })
         resp=make_response(jsonify(achievements=achievements))
         resp.status_code=200

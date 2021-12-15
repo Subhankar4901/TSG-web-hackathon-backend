@@ -24,6 +24,8 @@ def getAchievements(event_id):
             event_title=event.title,
             event_type=event.type,
             event_tags=event.event_tags.split(","),
+            start=str(event.start),
+            end=str(event.end),
             event_report=(event.report.decode('utf-8') if token_dict else None)
             ))
     resp.status_code=200

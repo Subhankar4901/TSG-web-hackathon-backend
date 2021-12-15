@@ -12,9 +12,9 @@ def getAchievements():
     token_dict=JWT.validator(token)
     if token_dict:
         user=User.query.filter_by(id=token_dict["id"]).first()
-        achivements=[]
+        achievements=[]
         for achievement in user.achievements:
-            achivements.append({
+            achievements.append({
                 "id":achievement.id,
                 "event_id":achievement.event.id,
                 "event_title":achievement.event.title,
@@ -22,12 +22,12 @@ def getAchievements():
                 "event_tags":achievement.event.event_tags,
                 "position":achievement.position
             })
-        resp=make_response(jsonify(response=achivements))
+        resp=make_response(jsonify(achievements=achievements))
         resp.status_code=200
         resp.content_type="application/json"
         return resp
     else:
-        resp=make_response(jsonify(response="Unauthorised"))
+        resp=make_response(jsonify(message="Unauthorised"))
         resp.status_code=401
         resp.content_type="application/json"
         return resp    

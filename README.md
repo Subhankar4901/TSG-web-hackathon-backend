@@ -28,7 +28,23 @@ The list of APIs are -
 	request: {"email": ""}
 	response: {"message": ""}
 
-2. 
+2. /login/official/auth -
+	desc: auth login via username and password, returns message with token and user type on successful login.
+	request: {	"username": "tsg_official","password":"123#abc%$pq"}
+	response:
+	upon successful login, status code 200
+	{
+		"message": "user authenticated",
+		"token": "",
+		"user_type": 4
+	}
+	upon unsuccessful login attempt, status code 401
+	{
+		"message": ""
+	}
+
+3. 
+
 ```
 
 ---

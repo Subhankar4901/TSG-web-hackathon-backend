@@ -21,7 +21,7 @@ class Complain(db.Model):
     def extractData(self):
         data = {
             "id" : self.id,
-            "userid" : self.userid,
+            "made_by": self.made_by.name,
             "date" : self.date,
             "description": self.description,
             "remarks" : self.remarks,

@@ -13,23 +13,18 @@ def addcomplaint():
     data = request.get_json()
     token = data.get("token")
     token_dict=JWT.validator(token)
-    if token_dict:
-        complain = Complain(
-            userid = token_dict.get("id"),
-            description = data.get("description"),
-            remarks = "In Review",
-            attachment = data.get("attachment")
-        )
-        # return "ok", 200
-        db.session.add(complain)
-        db.session.commit()		
-        resp=make_response(jsonify(message="Success"))
-        resp.status_code=200
-        return resp
-    else:
-        resp=make_response(jsonify(message="Unauthorised"))
-        resp.status_code=401
-        return resp
+    complain = Complain(
+        userid = token_dict.get("id"),
+        description = data.get("description"),
+        remarks = "In Review",
+        attachment = data.get("attachment").encode("utf-8")
+    )
+    # return "ok", 200
+    db.session.add(complain)
+    db.session.commit()		
+    resp=make_response(jsonify(message="Success, complaint added"))
+    resp.status_code=200
+    return resp
 
     
     

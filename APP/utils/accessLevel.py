@@ -10,7 +10,7 @@ A decorator for access level validation
 level - 1 admin
 level - 2 tsg officials
 level - 3 society and cells
-level - 4 stucdents
+level - 4 students
 '''
 def access_required(level = 1):
     def wrapper(fn):

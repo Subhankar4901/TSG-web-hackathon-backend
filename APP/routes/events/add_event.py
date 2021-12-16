@@ -2,12 +2,13 @@ from flask import Blueprint,request,jsonify,make_response
 from ...models.Event import Event
 from ...models.User import User
 from ... import db
-from ...utils.jwt import JWT
+from ...utils import JWT, access_required
 import datetime
 
-add_event_bp=Blueprint("add_event",__name__,url_prefix="/add_event")
+add_event_bp=Blueprint("add_event",__name__,url_prefix="/add")
 @add_event_bp.route("/",methods=["POST"])
 @add_event_bp.route("",methods=["POST"])
+@access_required(3)
 def add_event():
     data=request.get_json()
     token=data.get("token")
@@ -26,7 +27,8 @@ def add_event():
             organiser=organiser,
             event_tags=data.get("tags"),
             type=data.get("type"),
-            poster= data.get("poster").encode("utf-8") if data.get("poster") else data.get("poster"),
+            poster=data.get("poster").encode("utf-8") if data.get("poster") else data.get("poster"),
+            report=data.get("report").encode("utf-8") if data.get("report") else data.get("report"),
             participation_certificate=data.get("participation_certificate").encode("utf-8") if data.get("participation_certificate") else data.get("participation_certificate")
         )
         db.session.add(event)

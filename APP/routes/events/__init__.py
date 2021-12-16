@@ -7,6 +7,7 @@ from .upcoming_events import upcoming_event_bp
 from .event_details import info_bp
 from .delete_event import delete_event_bp
 from .update_event import update_event_bp
+from .participated_events import participation_bp
 
 event_bp=Blueprint("event",__name__,url_prefix="/events")
 event_bp.register_blueprint(add_event_bp)
@@ -17,3 +18,4 @@ event_bp.register_blueprint(view_curr_events_bp)
 event_bp.register_blueprint(ended_events_bp)
 event_bp.register_blueprint(upcoming_event_bp)
 event_bp.register_blueprint(info_bp)
+event_bp.register_blueprint(participation_bp)

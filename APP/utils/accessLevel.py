@@ -1,5 +1,5 @@
 from flask.json import  jsonify
-from flask import request
+from flask import request, make_response
 from functools import wraps
 from .jwt import JWT
 
@@ -34,6 +34,8 @@ def access_required(level = 1):
             if token_dict and token_dict.get("type") and int(token_dict.get("type")) <= level:
                 return fn(*args, **kwargs)
             else:
-                return jsonify(msg="Not Allowed!"), 401
+                resp=make_response(jsonify(message="Unauthorised"))
+                resp.status_code=401
+                return resp
         return decorator
     return wrapper

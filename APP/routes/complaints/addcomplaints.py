@@ -3,14 +3,16 @@ from ...models import Complain
 from ...utils.jwt import JWT
 from ...utils import access_required
 from ... import db
+import base64
 
 addcomplaint_bp = Blueprint('addcomplaint', __name__, url_prefix="/addcomplaint")
 
 @addcomplaint_bp.route("/", methods=["POST"])
 @addcomplaint_bp.route("", methods=["POST"])
-@access_required(4)
+# @access_required(4)
 def addcomplaint():
     data = request.get_json()
+    print(data==None)
     token = data.get("token")
     token_dict=JWT.validator(token)
     complain = Complain(

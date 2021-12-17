@@ -25,6 +25,6 @@ class Complain(db.Model):
             "date" : self.date,
             "description": self.description,
             "remarks" : self.remarks,
-            "attachment" : self.attachment
-        }
+            "attachment" : self.attachment.decode("utf-8")
+        } 
         return data

@@ -10,7 +10,13 @@ def getcomplaints():
 	data=request.args
 	token=data.get("token")
 	token_dict=JWT.validator(token)
-
+	'''
+		for any attachment do the following to get
+		back the pdf file in client side for a complain i
+        with open("attachment.pdf", "wb") as f:
+            buff = base64.b64decode(complains[i]['attachment'].encode('utf-8'))
+            f.write(buff)
+    '''
 	if token_dict:
 		complains = []
 		userType = int(token_dict['type'])

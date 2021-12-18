@@ -21,6 +21,7 @@ Then merge.
 ## APIs
 
 The list of APIs are -
+(also present in the thunderclient collection file in this repo)
 
 ```
 1. /login/student/sendotp -
@@ -92,6 +93,16 @@ The list of APIs are -
 4. 
 
 ```
+
+---
+
+## Format of files 
+The files are returned as string buffers. To get the files back, do the following -
+	
+	with open("file.pdf", "wb") as f:
+		buff = base64.b64decode(file.encode('utf-8'))
+		f.write(buff)
+	
 
 ---
 

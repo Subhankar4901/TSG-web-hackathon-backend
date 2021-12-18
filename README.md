@@ -97,6 +97,14 @@ The list of APIs are -
 ---
 
 ## Format of files 
+
+The files should be sent as encoded string in the request body.
+
+```
+	with open("test.pdf", "rb") as pdf_file:
+	    encoded_string = base64.b64encode(pdf_file.read()).decode("utf-8")
+```
+
 The files are returned as string buffers. To get the files back, do the following -
 	
 	with open("file.pdf", "wb") as f:

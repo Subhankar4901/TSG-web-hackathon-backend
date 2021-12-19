@@ -5,9 +5,11 @@ from decouple import config
 from flask_mail import Mail, Message
 from flask_migrate import Migrate
 from flask.json import JSONEncoder
+from flask_cors import CORS
 
 # Main application and configuration
 app=Flask(__name__)
+CORS(app)
 
 # configuration of mail
 app.config['MAIL_SERVER']='smtp.gmail.com'

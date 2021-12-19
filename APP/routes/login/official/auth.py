@@ -22,8 +22,8 @@ auth_bp = Blueprint('auth', __name__, url_prefix="/auth")
 @auth_bp.route("", methods=["POST"])
 def auth():
 	data = request.get_json()
-	user = data["username"]
-	password=data["password"]
+	user = data.get("username")
+	password=data.get("password")
 
 	# adding admin in database
 	if not User.query.filter_by(username=config("admin_username")).first():

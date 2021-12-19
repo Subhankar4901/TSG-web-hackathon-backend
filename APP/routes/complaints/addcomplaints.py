@@ -3,23 +3,22 @@ from ...models import Complain
 from ...utils.jwt import JWT
 from ...utils import access_required
 from ... import db
-import base64
-
 addcomplaint_bp = Blueprint('addcomplaint', __name__, url_prefix="/addcomplaint")
 
 @addcomplaint_bp.route("/", methods=["POST"])
 @addcomplaint_bp.route("", methods=["POST"])
-# @access_required(4)
+@access_required(4)
 def addcomplaint():
-    data = request.get_json()
-    print(data==None)
+    data = request.form
     token = data.get("token")
     token_dict=JWT.validator(token)
+    mypdf = request.files.get("file")
+    readPdf = mypdf.read()
     complain = Complain(
         userid = token_dict.get("id"),
         description = data.get("description"),
         remarks = "In Review",
-        attachment = data.get("attachment").encode("utf-8")
+        attachment = readPdf
     )
     # return "ok", 200
     db.session.add(complain)

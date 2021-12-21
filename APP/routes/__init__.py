@@ -5,7 +5,7 @@ from .achievements import achievements_bp
 from .events import event_bp
 from .complaints import complaints_bp
 
-base_bp = Blueprint('base', __name__, url_prefix="/")
+base_bp = Blueprint('base', __name__, url_prefix="/api")
 
 base_bp.register_blueprint(login_bp)
 base_bp.register_blueprint(updateusers_bp)

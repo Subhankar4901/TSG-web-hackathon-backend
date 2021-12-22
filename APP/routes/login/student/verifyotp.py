@@ -16,7 +16,7 @@ def verifyotp():
 	saved_data = OTP.query.filter_by(email=user_email).first()
 
 	if not saved_data:
-		resp=make_response(jsonify({"message":"OTP not found"} , email=None, password="OTP not available"))
+		resp=make_response(jsonify(message="OTP not found" , email=None, password="OTP not available"))
 		resp.headers.add("Content-Type","aplication/json")
 		resp.status_code=200
 		return resp
@@ -25,7 +25,7 @@ def verifyotp():
 
 	if (saved_data.otp == user_otp):
 		if (timeDelta.total_seconds() > valid_time*60):
-			resp=make_response(jsonify({"message":"otp expired"},email=None, password="OTP expired"))
+			resp=make_response(jsonify(message="otp expired",email=None, password="OTP expired"))
 			resp.headers.add("Content-Type","aplication/json")
 			resp.status_code=200
 		else:

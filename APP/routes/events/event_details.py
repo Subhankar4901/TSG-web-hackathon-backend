@@ -1,7 +1,7 @@
 from flask import Blueprint,jsonify,make_response,request
 from ...models.Event import Event
 from ...utils.jwt import JWT
-
+from decouple import config
 info_bp=Blueprint("info",__name__,url_prefix="/")
 
 # request contains event_id, no login required
@@ -27,8 +27,8 @@ def getAchievements(event_id):
             organiser=event.organiser.name,
             event_tags=event.event_tags,
             type=event.type,
-            report=event.report.decode('utf-8'),
-            poster=event.poster.decode('utf-8')
+            report=f"http://{config('host')}/events/report/{event_id}"  if event.report else None,
+            poster=f"http://{config('host')}/events/poster/{event_id}" if event.report else None
         ))
         return resp
     return make_response(jsonify(message="Unauthorized Access"), 401)

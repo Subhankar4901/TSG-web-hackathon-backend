@@ -13,7 +13,6 @@ def fetchWithToken():
 		user = User.query.get(token_dict['id'])
 		return make_response(jsonify(user={
 			'name':user.name,
-			'username':user.username,
 			'type':user.type,
 			'roll':user.roll,
 			'email':user.email,

@@ -32,3 +32,4 @@ def getAchievements(event_id):
         ))
         return resp
     return make_response(jsonify(message="Unauthorized Access"), 401)
+

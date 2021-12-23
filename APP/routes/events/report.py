@@ -21,7 +21,7 @@ def get_report(id):
         resp.status=401
         return resp
         
-@report_bp.route("/<id>/save",method=["POST"])
+@report_bp.route("/<id>/save",methods=["POST"])
 def save_report(id):
     '''
     Method to save report by admin.

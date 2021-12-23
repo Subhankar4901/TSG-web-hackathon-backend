@@ -35,15 +35,15 @@ def save_report(id):
         if token_dict["type"]<3:
             event.report=report.read()
             db.session.commit()
-            return make_response(jsonify(messege="Saved"),200)
+            return make_response(jsonify(message="Saved"),200)
         elif token_dict["type"]==3:
             if token_dict["id"]==event.organiser.id:
                 event.report=report.read()
                 db.session.commit()
-                return make_response(jsonify(messege="Saved"),200)
+                return make_response(jsonify(message="Saved"),200)
             else:
-                return make_response(jsonify(messege="Unauthorised"),401)
+                return make_response(jsonify(message="Unauthorised"),401)
         else:
-            return make_response(jsonify(messege="Unauthorised"),401)
+            return make_response(jsonify(message="Unauthorised"),401)
     
-    return make_response(jsonify(messege="Unauthorised"),401)
+    return make_response(jsonify(message="Unauthorised"),401)

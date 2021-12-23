@@ -23,8 +23,8 @@ def getInfo(event_id):
         organiser=event.organiser.name,
         event_tags=event.event_tags,
         type=event.type,
-        report=f"http://{config('host')}/events/report/{event_id}"  if event.report else None,
-        poster=f"http://{config('host')}/events/poster/{event_id}" if event.poster else None
+        report=f"http://{config('host')}/api/events/report/{event_id}"  if event.report else None,
+        poster=f"http://{config('host')}/api/events/poster/{event_id}" if event.poster else None
     ),200)
     return resp
 

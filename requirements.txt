@@ -18,7 +18,6 @@ itsdangerous==2.0.1
 Jinja2==3.0.3
 Mako==1.1.6
 MarkupSafe==2.0.1
-mysqlclient @ file:///C:/Users/shobhit%20gupta/Downloads/TSG-web-hackathon-backend/mysqlclient-1.4.6-cp38-cp38-win32.whl
 pycparser==2.21
 PyMySQL==1.0.2
 python-decouple==3.5

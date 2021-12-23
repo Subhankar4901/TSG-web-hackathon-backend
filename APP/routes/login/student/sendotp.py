@@ -12,7 +12,7 @@ sendotp_bp = Blueprint('sendotp', __name__, url_prefix="/sendotp")
 @sendotp_bp.route("", methods=["POST"])
 def sendotp():
     data = request.get_json()
-    user_email = data["email"]
+    user_email = data.get("email")
     user = OTP.query.filter_by(email=user_email).first()
     valid_time = 5 #in minutes
 

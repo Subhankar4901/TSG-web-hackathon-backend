@@ -27,7 +27,7 @@ def auth():
 
 	# adding admin in database
 	if not User.query.filter_by(username=config("admin_username")).first():
-		db.session.add(User(username=config("admin_username"), password=config("admin_password"), type=1, email=config("admin_email")))
+		db.session.add(User(username=config("admin_username"), password=config("admin_password"), type=1, email=config("admin_email"),name='admin'))
 		db.session.commit()
 
 	user_obj=User.query.filter_by(username=user).first()

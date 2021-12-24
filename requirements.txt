@@ -7,6 +7,7 @@ colorama==0.4.4
 DateTime==4.3
 dnspython==2.1.0
 Flask==2.0.2
+Flask-Cors==3.0.10
 Flask-Mail==0.9.1
 Flask-Migrate==3.1.0
 Flask-SQLAlchemy==2.5.1

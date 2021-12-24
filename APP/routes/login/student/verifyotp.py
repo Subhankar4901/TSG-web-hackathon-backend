@@ -25,26 +25,26 @@ def verifyotp():
 
 	if (saved_data.otp == user_otp):
 		if (timeDelta.total_seconds() > valid_time*60):
-			resp=make_response(jsonify(message="otp expired",email=None, password="OTP expired"))
+			resp=make_response(jsonify(message="otp expired"))
 			resp.headers.add("Content-Type","aplication/json")
-			resp.status_code=200
+			resp.status_code=401
 		else:
 			user = User.query.filter_by(email=user_email).first()
 			if user and (int(user.type) == 4):
-				resp=make_response(jsonify(message="user authenticated",email=None, password=None, token=JWT.tokenizer({"id":user.id,"type":user.type}), user_type=user.type))
+				resp=make_response(jsonify(message="user authenticated",token=JWT.tokenizer({"id":user.id,"type":user.type}), user_type=user.type))
 				resp.headers.add("Content-Type","aplication/json")
 				resp.status_code=200
 			else:
-				resp=make_response(jsonify(message="user not found", email="Wrong Email", password=None))
+				resp=make_response(jsonify(message="generate a otp first"))
 				resp.headers.add("Content-Type","aplication/json")
-				resp.status_code=200
+				resp.status_code=401
 
 		db.session.delete(saved_data)
 		db.session.commit()
 	else:
-		resp=make_response(jsonify(message="OTP mismatch", email=None, password="Invalid OTP"))
+		resp=make_response(jsonify(message="OTP invalid"))
 		resp.headers.add("Content-Type","aplication/json")
-		resp.status_code=200
+		resp.status_code=401
 
 	return resp
 	

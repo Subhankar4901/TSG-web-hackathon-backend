@@ -10,7 +10,6 @@ def get_report(id):
     Method to get report directly from backend.
     '''
     token=request.args.get("token")
-    print(token==None)
     if JWT.validator(token):
         event=Event.query.filter_by(id=int(id)).first()
         title=event.title

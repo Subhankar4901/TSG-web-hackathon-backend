@@ -25,7 +25,7 @@ def auth():
 	data = request.get_json()
 	user = data.get("username")
 	password=data.get("password")
-	print(data)
+	
 	# adding admin in database
 	if not User.query.filter_by(username=config("admin_username")).first():
 		db.session.add(User(username=config("admin_username"), password=config("admin_password"), type=1, email=config("admin_email"),name='admin'))

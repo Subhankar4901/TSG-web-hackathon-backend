@@ -10,7 +10,6 @@ def get_certificate(id):
     Method to get certificate directly from backend.
     '''
     token=request.args.get("token")
-    print(token==None)
     if JWT.validator(token):
         achievement=Achievement.query.get(id)
         title=achievement.event.title

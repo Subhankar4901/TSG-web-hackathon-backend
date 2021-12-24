@@ -18,7 +18,7 @@ def get_report(id):
         report=event.report
         return send_file(BytesIO(report),download_name=name,as_attachment=True)
     else:
-        resp=make_response(jsonify(messege="Unauthorised"))
+        resp=make_response(jsonify(message="Unauthorised"))
         resp.status=401
         return resp
         

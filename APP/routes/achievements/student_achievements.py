@@ -1,6 +1,7 @@
 from flask import Blueprint,request,make_response,jsonify
 from ...utils.jwt import JWT
 from ...models.User import User
+from decouple import config
 
 # request has token query parameters
 # response is achievements of student
@@ -22,7 +23,8 @@ def getAchievements():
                 "position":achievement.position,
                 'start':achievement.event.start,
                 'end':achievement.event.end,
-                'certificate':achievement.certificate.decode('utf-8')
+                'certificate_uploaded':True if achievement.certificate else False,
+                'certificate':f"http://{config('host')}/api/achievement/certificate/{achievement.id}"
             })
         resp=make_response(jsonify(achievements=achievements))
         resp.status_code=200

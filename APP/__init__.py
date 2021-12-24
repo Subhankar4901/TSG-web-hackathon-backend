@@ -8,9 +8,8 @@ from flask.json import JSONEncoder
 from flask_cors import CORS
 # Main application and configuration
 app=Flask(__name__)
-CORS(app)
-
 cors = CORS(app)
+
 # configuration of mail
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465

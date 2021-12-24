@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify,request,make_response
 from ....utils.sendEmail import sendEmail
-from ....models import OTP
+from ....models import OTP, User
 from .... import db
 from random import randint
 from datetime import datetime
@@ -13,6 +13,11 @@ sendotp_bp = Blueprint('sendotp', __name__, url_prefix="/sendotp")
 def sendotp():
     data = request.get_json()
     user_email = data.get("email")
+    user = User.query.filter_by(email=user_email).first()
+    if not(user and (int(user.type) == 4)):
+        resp=make_response(jsonify({"message":"User Not authorized to send otp"}))
+        resp.headers.add("Content-Type","aplication/json")
+        return resp
     user = OTP.query.filter_by(email=user_email).first()
     valid_time = 5 #in minutes
 
@@ -29,7 +34,7 @@ def sendotp():
         db.session.commit()
 
     message_subject = f"OTP for login"
-    otp = randint(100000, 999999)
+    otp = 100000 #randint(100000, 999999)
     message_body = f"OTP is {otp}. It is valid for {valid_time} minutes only."
     sendEmail(messageSubject=message_subject, messageBody=message_body, recipients=[user_email])
     response = {

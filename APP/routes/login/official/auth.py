@@ -21,7 +21,6 @@ auth_bp = Blueprint('auth', __name__, url_prefix="/auth")
 @auth_bp.route("/", methods=["POST"])
 @auth_bp.route("", methods=["POST"])
 def auth():
-	print('here')
 	data = request.get_json()
 	user = data.get("username")
 	password=data.get("password")
@@ -34,17 +33,17 @@ def auth():
 	user_obj=User.query.filter_by(username=user).first()
 	if user_obj:
 		if password == user_obj.password:
-			resp=make_response(jsonify(message="user authenticated",token=JWT.tokenizer({"id":user_obj.id,"type":user_obj.type, "username": user}), user_type=user_obj.type))
+			resp=make_response(jsonify(message="user authenticated", username=None, password=None,token=JWT.tokenizer({"id":user_obj.id,"type":user_obj.type, "username": user}), user_type=user_obj.type))
 			resp.status_code=200
 			resp.headers.add("Content-Type","aplication/json")
 			return resp
 		else:
-			resp=make_response(jsonify(message="wrong password"))
+			resp=make_response(jsonify(message="wrong password", username=None, password="Invalid Password"))
 			resp.status_code=401
 			resp.headers.add("Content-Type","aplication/json")
 			return resp
 	else:
-		resp=make_response(jsonify(message="username invalid"))
+		resp=make_response(jsonify(message="user not found", username="Invalid username", password=None))
 		resp.status_code=401
 		resp.headers.add("Content-Type","aplication/json")
 		return resp

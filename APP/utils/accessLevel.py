@@ -21,9 +21,12 @@ def access_required(level = 1):
             token_dict = None
             if data:
                 token = data.get("token")
-                
             if token is None:
-                data = request.args
+                data = request.headers
+                if data:
+                    token = data.get("token")
+            if token is None:
+                data = request.form
                 if data:
                     token = data.get("token")
             '''

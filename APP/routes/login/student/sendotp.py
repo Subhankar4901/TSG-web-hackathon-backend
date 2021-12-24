@@ -12,7 +12,7 @@ sendotp_bp = Blueprint('sendotp', __name__, url_prefix="/sendotp")
 @sendotp_bp.route("", methods=["POST"])
 def sendotp():
     data = request.get_json()
-    user_email = data["email"]
+    user_email = data.get("email")
     user = OTP.query.filter_by(email=user_email).first()
     valid_time = 5 #in minutes
 
@@ -20,7 +20,8 @@ def sendotp():
         timeDelta = datetime.now() - user.time
 
         if (timeDelta.total_seconds() <= valid_time*60):
-            resp=make_response(jsonify({"message":"otp already sent, check your email."}))
+            secondsLeft =int( valid_time*60 - timeDelta.total_seconds())
+            resp=make_response(jsonify({"message":f"otp already sent, check your email. Retry in {secondsLeft} seconds"}))
             resp.headers.add("Content-Type","aplication/json")
             return resp
 

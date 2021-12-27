@@ -2,13 +2,13 @@ from flask import Blueprint, jsonify,request,make_response
 from ....utils import JWT
 from ....models import User
 
-fetch_bp = Blueprint('sendotp', __name__, url_prefix="/token")
+fetch_bp = Blueprint('fetchUser', __name__, url_prefix="/token")
 
 @fetch_bp.route("/", methods=["POST"])
 @fetch_bp.route("", methods=["POST"])
 def fetchWithToken():
-	data = request.get_json()
-	token_dict = JWT.validator(data.get("token"))
+	token = request.cookies.get('token')
+	token_dict = JWT.validator(token)
 	if token_dict:
 		user = User.query.get(token_dict['id'])
 		return make_response(jsonify(user={

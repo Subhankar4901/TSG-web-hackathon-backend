@@ -8,7 +8,7 @@ from decouple import config
 student_bp=Blueprint("student_achievements",__name__,url_prefix="/student")
 @student_bp.route("/getAchievements")
 def getAchievements():
-    token=request.args.get("token")
+    token=request.cookies.get("token")
     token_dict=JWT.validator(token)
     if token_dict:
         user=User.query.filter_by(id=token_dict["id"]).first()

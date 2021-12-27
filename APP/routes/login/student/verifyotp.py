@@ -29,11 +29,14 @@ def verifyotp():
 			resp.headers.add("Content-Type","aplication/json")
 			resp.status_code=401
 		else:
-			user = User.query.filter_by(email=user_email).first()
-			if user and (int(user.type) == 4):
-				resp=make_response(jsonify(message="user authenticated",token=JWT.tokenizer({"id":user.id,"type":user.type}), user_type=user.type))
-				resp.headers.add("Content-Type","aplication/json")
+			user_obj = User.query.filter_by(email=user_email).first()
+			if user_obj and (int(user_obj.type) == 4):
+				token=JWT.tokenizer({"id":user_obj.id,"type":user_obj.type})
+				resp=make_response(jsonify(message="user authenticated",user_type=user_obj.type))
+				resp.set_cookie('token', token, httponly = True);
 				resp.status_code=200
+				resp.headers.add("Content-Type","aplication/json")
+				return resp
 			else:
 				resp=make_response(jsonify(message="generate a otp first"))
 				resp.headers.add("Content-Type","aplication/json")

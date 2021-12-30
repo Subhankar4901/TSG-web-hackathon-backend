@@ -33,7 +33,7 @@ def verifyotp():
 			if user_obj and (int(user_obj.type) == 4):
 				token=JWT.tokenizer({"id":user_obj.id,"type":user_obj.type})
 				resp=make_response(jsonify(message="user authenticated",user_type=user_obj.type))
-				resp.set_cookie('token', token, httponly = True);
+				resp.set_cookie('token', token, httponly = True)
 				resp.status_code=200
 				resp.headers.add("Content-Type","aplication/json")
 				return resp

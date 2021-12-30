@@ -1,5 +1,6 @@
 from .. import db
 from datetime import datetime
+from decouple import config
 
 class Complain(db.Model):
     '''
@@ -25,6 +26,6 @@ class Complain(db.Model):
             "date" : self.date,
             "description": self.description,
             "remarks" : self.remarks,
-            "attachment" : self.attachment.decode("utf-8") if self.attachment else None
+            "attachment" : f"{config('host')}/api/complaints/{self.id}/getattachment/" if self.attachment else None
         } 
         return data

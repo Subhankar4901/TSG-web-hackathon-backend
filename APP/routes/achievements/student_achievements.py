@@ -24,7 +24,7 @@ def getAchievements():
                 'start':achievement.event.start,
                 'end':achievement.event.end,
                 'certificate_uploaded':True if achievement.certificate else False,
-                'certificate':f"http://{config('host')}/api/achievement/certificate/{achievement.id}"
+                'certificate':f"{config('host')}/api/achievement/certificate/{achievement.id}"
             })
         resp=make_response(jsonify(achievements=achievements))
         resp.status_code=200

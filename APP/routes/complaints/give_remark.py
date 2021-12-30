@@ -9,7 +9,7 @@ remark_bp = Blueprint('remark', __name__, url_prefix="/addRemark")
 @remark_bp.route("/", methods=["POST"])
 def giveRemark():
 	data = request.get_json()
-	token = data.get("token")
+	token = request.cookies.get("token")
 	complain_id = data.get("complain_id")
 	remarks = data.get("remark")
 	token = data.get("token")

@@ -28,7 +28,7 @@ def save_report(id):
     '''
     data=request.get_json()
     report=request.files["report"]
-    token=data["token"]
+    token=request.cookies.get("token")
     token_dict=JWT.validator(token)
     event=Event.query.filter_by(id=int(id)).first()
     if token_dict:

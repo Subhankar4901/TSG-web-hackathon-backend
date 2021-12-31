@@ -10,7 +10,7 @@ addcomplaint_bp = Blueprint('addcomplaint', __name__, url_prefix="/addcomplaint"
 @access_required(4)
 def addcomplaint():
     data = request.form
-    token = data.get("token")
+    token = request.cookies.get("token")
     token_dict=JWT.validator(token)
     mypdf = request.files.get("file")
     readPdf = mypdf.read()

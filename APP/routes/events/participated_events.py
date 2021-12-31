@@ -8,7 +8,7 @@ participation_bp = Blueprint("participation",__name__,url_prefix="/participation
 @participation_bp.route("")
 @access_required(4)
 def get_participations():
-	token_dict = JWT.validator(request.args.get("token"))
+	token_dict = JWT.validator(request.cookies.get("token"))
 	user_id = token_dict["id"]
 	user = User.query.get(user_id)
 	participations = []

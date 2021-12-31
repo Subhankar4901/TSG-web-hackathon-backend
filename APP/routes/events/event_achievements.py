@@ -9,7 +9,7 @@ achievements_bp=Blueprint("achievements",__name__,url_prefix="/")
 @achievements_bp.route("<event_id>/getAchievements/")
 @achievements_bp.route("<event_id>/getAchievements")
 def getAchievements(event_id):
-    token=request.args.get("token")
+    token=request.cookies.get("token")
     event=Event.query.get(event_id)
     achievements=[]
     for achievement in event.achievements:

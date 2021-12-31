@@ -10,6 +10,10 @@ info_bp=Blueprint("info",__name__,url_prefix="/")
 @info_bp.route("<event_id>/info/")
 @info_bp.route("<event_id>/info")
 def getInfo(event_id):
+    token = request.cookies.get('token')
+    token_dict = JWT.validator(token)
+    if not token_dict:
+        return make_response(jsonify(message="Unauthorized"), 401)
     event = Event.query.get(event_id)
     resp = make_response(jsonify(
         title=event.title,

@@ -11,7 +11,7 @@ update_user_events_bp = Blueprint('update_user_events', __name__,url_prefix="/up
 @update_user_events_bp.route("",methods=["POST"])
 def update_user_events():
     data = request.get_json()
-    token = data.get("token")
+    token = request.cookies.get("token")
     token_dict = JWT.validator(token)
     participant_emails = data.get("emails")
     eventId = data.get("event_id")

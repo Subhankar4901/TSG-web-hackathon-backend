@@ -12,7 +12,7 @@ add_event_bp=Blueprint("add_event",__name__,url_prefix="/add")
 def add_event():
     data=request.get_json()
     poster=request.files.get("poster")
-    token=data.get("token")
+    token=request.cookies.get("token")
     token_dict=JWT.validator(token)
     if token_dict:
         organiser=User.query.filter_by(id=token_dict.get("id")).first()

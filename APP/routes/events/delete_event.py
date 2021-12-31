@@ -8,7 +8,7 @@ delete_event_bp=Blueprint("delete_event",__name__,url_prefix="/delete")
 @delete_event_bp.route("",methods=["POST"])
 def delete_event():
 	data = request.get_json()
-	token = data.get("token")
+	token = request.cookies.get("token")
 	event_id = data.get("event_id")
 	token_dict = JWT.validator(token)
 	if token_dict and event_id:

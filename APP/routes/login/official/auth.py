@@ -21,7 +21,6 @@ auth_bp = Blueprint('auth', __name__, url_prefix="/auth")
 @auth_bp.route("/", methods=["POST"])
 @auth_bp.route("", methods=["POST"])
 def auth():
-	print('here')
 	data = request.get_json()
 	user = data.get("username")
 	password=data.get("password")

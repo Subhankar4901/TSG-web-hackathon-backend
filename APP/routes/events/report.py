@@ -41,9 +41,5 @@ def save_report(id):
                 event.report=report.read()
                 db.session.commit()
                 return make_response(jsonify(message="Saved"),200)
-            else:
-                return make_response(jsonify(message="Unauthorised"),401)
-        else:
-            return make_response(jsonify(message="Unauthorised"),401)
     
     return make_response(jsonify(message="Unauthorised"),401)

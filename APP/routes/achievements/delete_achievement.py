@@ -9,7 +9,7 @@ delete_achievement_bp = Blueprint("delete_achievement",__name__,url_prefix="/del
 @delete_achievement_bp.route("/", methods=["POST"])
 def delete_achievement():
 	data = request.get_json()
-	token = request.cookies.get("token")
+	token=request.cookies.get("token")
 	achievement_id = data.get("achievement_id")
 	token_dict = JWT.validator(token)
 	if token_dict and achievement_id:

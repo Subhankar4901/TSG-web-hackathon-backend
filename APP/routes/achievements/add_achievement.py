@@ -13,7 +13,7 @@ add_achievement_bp = Blueprint("add_achievement",__name__,url_prefix="/add")
 @add_achievement_bp.route("/",methods=["POST"])
 def addAchievement():
     data=request.get_json()
-    token=data.get("token")
+    token=request.cookies.get("token")
     token_dict=JWT.validator(token)
     if token_dict:
         user=User.query.filter_by(email=data.get("winner_email")).first()

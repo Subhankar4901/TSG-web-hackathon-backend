@@ -15,6 +15,7 @@ class Complain(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     userid=db.Column (db.Integer, db.ForeignKey("user.id"))
     date=db.Column(db.DateTime, default = datetime.now())
+    subject=db.Column(db.String(50))
     description=db.Column(db.Text)
     remarks=db.Column(db.Text)
     attachment=db.Column(db.LargeBinary)

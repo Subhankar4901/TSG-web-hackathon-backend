@@ -25,6 +25,7 @@ class Complain(db.Model):
             "id" : self.id,
             "made_by": self.made_by.name,
             "date" : self.date,
+            "subject":self.subject,
             "description": self.description,
             "remarks" : self.remarks,
             "attachment" : f"{config('host')}/api/complaints/{self.id}/getattachment/" if self.attachment else None

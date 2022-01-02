@@ -13,11 +13,13 @@ def addcomplaint():
     token_dict=JWT.validator(token)
     if not token_dict:
         return make_response(jsonify(message="Unauthorised"), 401)
-    mypdf = request.files.get("attachment")
-    readPdf = mypdf.read()
+    readPdf = request.files.get("attachment")
+    if readPdf:
+        readPdf = readPdf.read()
     complain = Complain(
         userid = token_dict.get("id"),
         description = data.get("description"),
+        subject=data.get("subject"),
         remarks = "In Review",
         attachment = readPdf
     )

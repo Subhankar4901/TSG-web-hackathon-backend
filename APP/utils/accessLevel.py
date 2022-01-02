@@ -16,7 +16,7 @@ def access_required(level = 1):
     def wrapper(fn):
         @wraps(fn)
         def decorator(*args, **kwargs):
-            token = request.cookies.get("cookies")
+            token = request.cookies.get("token")
             token_dict = None
             '''
             Add more possible ways to get JWT token here

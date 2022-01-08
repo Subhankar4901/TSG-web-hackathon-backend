@@ -6,7 +6,7 @@ from decouple import config
 # request has token query parameters
 # response is achievements of student
 student_bp=Blueprint("student_achievements",__name__,url_prefix="/student")
-@student_bp.route("/getAchievements")
+@student_bp.route("/getAchievements", methods=['GET'])
 def getAchievements():
     token=request.cookies.get("token")
     token_dict=JWT.validator(token)

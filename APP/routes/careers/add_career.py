@@ -24,6 +24,7 @@ def add_career():
             location=data.get("location"),
             # date=datetime.datetime.fromisoformat(data.get("date")),
             report=report,
+            jobprofile=data.get("jobprofile"),
             type=data.get("type")
         )
         db.session.add(career)

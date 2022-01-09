@@ -9,7 +9,7 @@ get_careers_bp = Blueprint("get_careers",__name__,url_prefix="/get_careers")
 
 @get_careers_bp.route('/')
 @get_careers_bp.route("")
-@access_required(2)
+@access_required(4)
 def get_careers():
     careers = Career.query.all()
     current = []
@@ -21,7 +21,8 @@ def get_careers():
                 "location":career.location,
                 'type':career.type,
                 "date":career.date,
-                "report_url":f"http://{config('host')}/api/events/report/{career.id}"  if career.report else None,
+                "jobprofile":career.jobprofile,
+                "report_url":f"api/careers/report/{career.id}"  if career.report else None,
             }
         )
     

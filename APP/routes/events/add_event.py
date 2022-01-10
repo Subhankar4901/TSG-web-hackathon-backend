@@ -23,12 +23,12 @@ def add_event():
             jugde_criteria=data.get("jugde_criteria"),
             timeline=data.get("timeline"),
             venue=data.get("venue"),
-            start=datetime.datetime.fromisoformat(data.get("start")),
-            end=datetime.datetime.fromisoformat(data.get("end")),
+            # start=datetime.datetime.fromisoformat(data.get("start")),
+            # end=datetime.datetime.fromisoformat(data.get("end")),
             organiser=organiser,
             event_tags=data.get("tags"),
             type=data.get("type"),
-            poster=poster.read()
+            poster=poster.read() if poster else None
         )
         db.session.add(event)
         db.session.commit()

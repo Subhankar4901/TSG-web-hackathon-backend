@@ -20,7 +20,7 @@ def getInfo(event_id):
         introduction=event.introduction,
         procedure=event.procedure,
         jugde_criteria=event.jugde_criteria,
-        timeline=event.timeline.split(","),
+        timeline=event.timeline,
         venue=event.venue,
         start=event.start,
         end=event.end,

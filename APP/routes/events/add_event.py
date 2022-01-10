@@ -10,7 +10,7 @@ add_event_bp=Blueprint("add_event",__name__,url_prefix="/add")
 @add_event_bp.route("",methods=["POST"])
 @access_required(3)
 def add_event():
-    data=request.get_json()
+    data=request.form
     poster=request.files.get("poster")
     token=request.cookies.get("token")
     token_dict=JWT.validator(token)

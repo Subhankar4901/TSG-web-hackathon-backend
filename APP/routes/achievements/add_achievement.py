@@ -2,7 +2,7 @@ from flask import Blueprint,request,jsonify,make_response
 from ...models.Achievement import Achievement
 from ...models.User import User
 from ...models.Event import Event
-from ...utils.jwt import JWT
+from ...utils import JWT, sendEmail
 from ... import db
 
 add_achievement_bp = Blueprint("add_achievement",__name__,url_prefix="/add")
@@ -23,6 +23,7 @@ def addAchievement():
             db.session.add(achievement)
             db.session.commit()
             resp=make_response(jsonify(message="Achievement added"))
+            sendEmail("Achievement added", f"Your achievement in {event.title} was added", [data.get("winner_email")])
             return resp
         else:
             resp=make_response(jsonify(message="Unauthorised"))

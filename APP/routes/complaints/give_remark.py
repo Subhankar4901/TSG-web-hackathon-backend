@@ -1,6 +1,6 @@
 from flask import Blueprint, json, request, make_response, jsonify
 from ...models import Complain
-from ...utils.jwt import JWT
+from ...utils import JWT, sendEmail
 from ...models import Complain
 from ... import db
 
@@ -21,5 +21,6 @@ def giveRemark():
 			complain_row.remarks = remarks
 			db.session.add(complain_row)
 			db.session.commit()
+			sendEmail("Complaint Remark updated", f"Remark for your complaint with subject {complain_row.subject} was updated", [complain_row.made_by.email])
 			return make_response(jsonify(message=f"remark updated as `{remarks}`"))
 	return make_response(jsonify(message="Invalid request"), 401)

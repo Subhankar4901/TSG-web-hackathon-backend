@@ -1,7 +1,7 @@
 from flask import Blueprint, json, request, make_response, jsonify
 from ...models import Complain
 from ...utils.jwt import JWT
-from ...utils import access_required
+from ...utils import access_required, sendEmail
 from ... import db
 addcomplaint_bp = Blueprint('addcomplaint', __name__, url_prefix="/addcomplaint")
 
@@ -28,6 +28,7 @@ def addcomplaint():
     db.session.commit()		
     resp=make_response(jsonify(message="Success, complaint added"))
     resp.status_code=200
+    sendEmail("New Complaint", f"A new complaint was added", [], officials=True)
     return resp
 
     

@@ -11,7 +11,7 @@ add_career_bp=Blueprint("add_career",__name__,url_prefix="/add")
 @access_required(2)
 def add_career():
     data=request.form
-    report=request.files.get("report")
+    report=request.files.get("attachment")
     if(report != None):
         report = report.read()
     token=request.cookies.get("token")
@@ -25,7 +25,8 @@ def add_career():
             # date=datetime.datetime.fromisoformat(data.get("date")),
             report=report,
             jobprofile=data.get("jobprofile"),
-            type=data.get("type")
+            type=data.get("type"),
+            uploadedby=token_dict.get("username")
         )
         db.session.add(career)
         db.session.commit()

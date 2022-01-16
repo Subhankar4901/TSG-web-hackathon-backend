@@ -17,7 +17,7 @@ def get_report(id):
         report=career.report
         if(len(report) == 0):
             return "No file uploaded",200
-        return send_file(BytesIO(report),download_name=name,as_attachment=True)
+        return send_file(BytesIO(report), mimetype="application/pdf")
     else:
         resp=make_response(jsonify(message="Unauthorised"))
         resp.status=401

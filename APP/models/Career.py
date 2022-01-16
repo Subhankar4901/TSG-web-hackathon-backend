@@ -15,6 +15,7 @@ class Career(db.Model):
     title=db.Column(db.String(100))
     location=db.Column(db.String(200))
     date=db.Column(db.DateTime, default = datetime.now())
-    report=db.Column(db.LargeBinary)
+    report=db.Column(db.LargeBinary(length=(2**24)-1))
     jobprofile=db.Column(db.String(100)) # 
     type=db.Column(db.String(100)) # type = "SDE, Quant, Data, Consulting, Finance, Core, Other"
+    uploadedby=db.Column(db.String(100))

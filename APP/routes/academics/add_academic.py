@@ -14,9 +14,9 @@ def add_academic():
         attachment = attachment.read()
     token=request.cookies.get("token")
     token_dict=JWT.validator(token)
-    downloaLink = data.get("downloadLink")
-    if downloaLink == None:
-        downloaLink = ""
+    downloadLink = data.get("downloadLink")
+    if downloadLink == None:
+        downloadLink = ""
     print(token_dict)
     if token_dict:
         print(data)
@@ -27,7 +27,7 @@ def add_academic():
             semester = data.get("semester"),
             type=data.get("type"),
             uploadedby=token_dict.get("username"),
-            downloaLink=downloaLink,
+            downloadLink=downloadLink,
             attachment=attachment,
         )
         db.session.add(academic)

@@ -25,7 +25,7 @@ def get_academics():
                 "uploadedby": academic.uploadedby,
                 'downloadcount':academic.downloadcount,
                 'downloadLink':academic.downloadLink,
-                "attachment_url":f"api/academics/attachment/{academic.id}"  if academic.attachment else None,
+                "attachment_url":f"api/academic/attachment/{academic.id}"  if academic.attachment else None,
             }
         )
     

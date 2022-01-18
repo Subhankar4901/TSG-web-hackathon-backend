@@ -1,5 +1,6 @@
 from flask import Blueprint,send_file,request,jsonify,make_response
 from ...models.Academic import Academic
+from ... import db
 from ...utils.jwt import JWT
 from io import BytesIO
 
@@ -15,6 +16,8 @@ def get_attachment(id):
         attachment=academic.attachment
         if(len(attachment) == 0):
             return "No file uploaded",200
+        academic.downloadcount += 1
+        db.session.commit()
         return send_file(BytesIO(attachment), mimetype="application/pdf")
     else:
         resp=make_response(jsonify(message="Unauthorised"))

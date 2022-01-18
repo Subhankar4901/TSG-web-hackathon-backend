@@ -5,6 +5,7 @@ from .. import db
 from .otp import OTP
 from .Complain import Complain
 from .Career import Career
+from .Academic import Academic
 
 # relations
 # Association table to model the many-many relationship of User and Event

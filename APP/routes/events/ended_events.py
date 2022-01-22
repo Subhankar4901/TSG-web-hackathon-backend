@@ -10,6 +10,8 @@ ended_events_bp=Blueprint("ended_events",__name__,url_prefix="/ended")
 @ended_events_bp.route("")
 @ended_events_bp.route("/")
 def ended_events():
+    if not request.args.get("t"):
+        return make_response(jsonify(message="invalid request"), 400)
     t=float(request.args.get("t")) # In days.
     archive = request.args.get("archive") != None
     today=datetime.date.today()

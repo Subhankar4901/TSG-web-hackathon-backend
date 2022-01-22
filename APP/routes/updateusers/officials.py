@@ -3,6 +3,7 @@ from ...utils.sheet import Sheet
 from ...utils.jwt import JWT
 from ...models import User
 from io import StringIO
+from ... import db
 
 officials_bp=Blueprint('officials',__name__,url_prefix="/officials")
 
@@ -19,5 +20,11 @@ def updateOfficials():
 		return make_response(jsonify({"message":"Unauthorized access."}), 401)
 	
 	sheet = request.files.get('sheet')
-	Sheet.get_officials(StringIO(sheet.read().decode()))
-	return jsonify({"message": "officals updated in the database"})
+	
+	if sheet:
+		db.session.query(User).filter(User.type<4).delete()
+		db.session.commit()
+		Sheet.get_officials(StringIO(sheet.read().decode()))
+		return jsonify({"message": "officals updated in the database"})
+
+	return jsonify({"message": "no sheet uploaded"})

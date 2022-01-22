@@ -28,3 +28,4 @@ SQLAlchemy==1.4.27
 Werkzeug==2.0.2
 zipp==3.6.0
 zope.interface==5.4.0
+python-dateutil

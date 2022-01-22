@@ -3,6 +3,7 @@ from ...utils.sheet import Sheet
 from ...utils.jwt import JWT
 from ...models import User
 from io import StringIO
+from ... import db
 
 students_bp=Blueprint('students',__name__,url_prefix="/students")
 
@@ -19,5 +20,9 @@ def updateStudents():
 		return make_response(jsonify({"message":"Unauthorized access."}), 401)
 
 	sheet = request.files.get('sheet')
-	Sheet.get_students(StringIO(sheet.read().decode()))
-	return jsonify({"message": "students updated in the database"})
+	if sheet:
+		db.session.query(User).filter(User.type==4).delete()
+		db.session.commit()
+		Sheet.get_students(StringIO(sheet.read().decode()))
+		return jsonify({"message": "students updated in the database"})
+	return jsonify({"message": "no sheet uploaded"})

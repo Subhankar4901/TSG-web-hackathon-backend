@@ -18,6 +18,7 @@ def getAchievements(event_id):
             "winner_name":achievement.achiever.name,
             "position": achievement.position
         })
+    achievements.sort(key=(lambda ach:ach["position"]))
     resp=make_response(jsonify(achievements=achievements))
     resp.status_code=200
     resp.content_type="application/json"

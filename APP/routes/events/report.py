@@ -21,12 +21,11 @@ def get_report(id):
         resp.status=401
         return resp
         
-@report_bp.route("/<id>/save",methods=["POST"])
+@report_bp.route("/<id>/save-report",methods=["POST"])
 def save_report(id):
     '''
     Method to save report by admin.
     '''
-    data=request.get_json()
     report=request.files["report"]
     token=request.cookies.get("token")
     token_dict=JWT.validator(token)
@@ -35,11 +34,11 @@ def save_report(id):
         if token_dict["type"]<3:
             event.report=report.read()
             db.session.commit()
-            return make_response(jsonify(message="Saved"),200)
+            return make_response(jsonify(message="Report Saved"),200)
         elif token_dict["type"]==3:
             if token_dict["id"]==event.organiser.id:
                 event.report=report.read()
                 db.session.commit()
-                return make_response(jsonify(message="Saved"),200)
+                return make_response(jsonify(message="Report Saved"),200)
     
     return make_response(jsonify(message="Unauthorised"),401)

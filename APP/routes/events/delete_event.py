@@ -3,13 +3,11 @@ from ...models import Event
 from ... import db
 from ...utils.jwt import JWT
 
-delete_event_bp=Blueprint("delete_event",__name__,url_prefix="/delete")
-@delete_event_bp.route("/",methods=["POST"])
-@delete_event_bp.route("",methods=["POST"])
-def delete_event():
-	data = request.get_json()
+delete_event_bp=Blueprint("delete_event",__name__,url_prefix="/")
+@delete_event_bp.route("<event_id>/delete",methods=["POST"])
+@delete_event_bp.route("<event_id>/delete/",methods=["POST"])
+def delete_event(event_id):
 	token = request.cookies.get("token")
-	event_id = data.get("event_id")
 	token_dict = JWT.validator(token)
 	if token_dict and event_id:
 		event_obj = Event.query.get(event_id)

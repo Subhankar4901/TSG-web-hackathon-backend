@@ -21,8 +21,6 @@ def updateStudents():
 
 	sheet = request.files.get('sheet')
 	if sheet:
-		db.session.query(User).filter(User.type==4).delete()
-		db.session.commit()
 		Sheet.get_students(StringIO(sheet.read().decode()))
 		return jsonify({"message": "students updated in the database"})
 	return jsonify({"message": "no sheet uploaded"})

@@ -22,8 +22,6 @@ def updateOfficials():
 	sheet = request.files.get('sheet')
 	
 	if sheet:
-		db.session.query(User).filter(User.type<4).delete()
-		db.session.commit()
 		Sheet.get_officials(StringIO(sheet.read().decode()))
 		return jsonify({"message": "officals updated in the database"})
 

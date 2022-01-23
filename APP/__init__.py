@@ -1,13 +1,17 @@
 from datetime import datetime
-from flask import Flask,url_for
+from flask import Flask,url_for,render_template,send_from_directory,request,redirect
 from flask_sqlalchemy import SQLAlchemy
 from decouple import config
 from flask_mail import Mail, Message
 from flask_migrate import Migrate
 from flask.json import JSONEncoder
 from flask_cors import CORS
+import os
+
 # Main application and configuration
-app=Flask(__name__)
+app = Flask(__name__, static_url_path='',
+                  static_folder='../build',
+                  template_folder='../build')
 cors = CORS(app)
 
 # configuration of mail
@@ -49,3 +53,22 @@ def get_map():
         except:
             pass
     return data
+
+# Serve React App
+@app.route('/', defaults={'path': ''})
+
+@app.route('/<path:path>')
+def serve(path):
+    print(f"path is {path}")
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return render_template(app.static_folder, path)
+    else:
+        return render_template('index.html')
+
+
+@app.errorhandler(404)
+def handle_404(e):
+    if request.path.startswith('/api'):
+        return "API NOT FOUND", 404
+    else:
+        return render_template('index.html')

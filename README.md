@@ -11,110 +11,44 @@ Problem statement : [Drive link](https://drive.google.com/file/d/1Hmfomj7pa0o8AZ
 
 ---
 
-## Contribution
+## Setup
 
-Make a new branch for each issue and then open pull request to check if there is any conflict.
-Then merge.
-
----
-
-## APIs
-
-The list of APIs are -
-(also present in the thunderclient collection file in this repo)
-
-```
-1. /login/student/sendotp -
-	desc: sends otp to spec email.
-	request: {"email": ""}
-	response: {"message": ""}
-
-2. /login/official/auth -
-	desc: auth login via username and password, returns message with token and user type on successful login.
-	request: {	"username": "tsg_official","password":"123#abc%$pq"}
-	response:
-	upon successful login, status code 200
-	{
-		"message": "user authenticated",
-		"token": "",
-		"user_type": 4
-	}
-	upon unsuccessful login attempt, status code 401
-	{
-		"message": ""
-	}
-
-	token data format:
-	{
-		"id": 14,
-		"type": 4,
-		"username": "tsg_official"
-	}
-
-3. complaints/getcomplaints -
-	desc : GET request that returns list of complaints according to access level.
-	Params
-	token : the JWT token with the following payload
-	{
-		"id": 15,
-		"type": 3,
-		"username": "soc_governor"
-	}
-	
-	Response 
-	Successful try (Status 200)
-	{
-		"complaints": [
-				{
-					"attachment": null,
-					"date": "Wed, 15 Dec 2021 14:08:56 GMT",
-					"description": "Can I create a complain",
-					"id": 1, 
-					"remarks": "pending",
-					"userid": 17
-				},
-				{
-					"attachment": null,
-					"date": "Wed, 15 Dec 2021 12:13:29 GMT",
-					"description": "I can't set events",
-					"id": 2,
-					"remarks": "In Review",
-					"userid": 15
-				}
-			],
-		"message": "Success"
-	}
-	
-	Failure try (status 401)
-	{
-		"message": "Unauthorised"
-	}
-	here id in response is the complain id.
-4. 
-
-```
+1. Setup a virtual environment.
+2. Activate the virtual environment and execute flask run.
+3. Now visit http://localhost:5000/.
+4. The configurations can be seen in .env file and be edited preferably.
+5. The sender email can be changed in .env file.
 
 ---
 
-## Format of files 
+## Using the application
 
-The files should be sent as encoded string in the request body.
-
-```
-	with open("test.pdf", "rb") as pdf_file:
-	    encoded_string = base64.b64encode(pdf_file.read()).decode("utf-8")
-```
-
-The files are returned as string buffers. To get the files back, do the following -
-	
-	with open("file.pdf", "wb") as f:
-		buff = base64.b64decode(file.encode('utf-8'))
-		f.write(buff)
-	
+1. 	First login as admin (username=admin and password=admin_password). 
+	The admin information can be changed in the .env file.
+2. 	Update the users in the database in profile -> Update Users.
+	TSG official username should be tsg_official and society governor username should end with 
+	governor.
+3.  Now, the application is ready to be used by the users.
 
 ---
 
-## Our backend Team
+## Features
+
+1. New events can be added.
+2. Upcoming, current and past events can be viewed and deleted (only by priviledged users).
+3. Reports can be added for the events. 
+4. Achievements can be added. Students can view their achievements and download their certificate.
+5. Complaints can be made. Students and society can see their complaints. Admin and tsg official can view all complaints and add remarks.
+6. Student point can be used to get study materials and add new materials.
+7. News currently contains feature to send news by mail.
+8. Any of the features can be searched easily by a search box in the top right.
+9. User can login and logout by clicking the dropdown at top right corner.
+10. Login is made as guided in the problem statement.
+
+
+---
+
+## Our Team
 
 | Name | Position | Contact |
 | :----: |:----: |:----:|

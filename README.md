@@ -46,6 +46,8 @@ Frontend repository: https://github.com/shobhit10058/-TSG-web-hackathon-frontend
 8. Any of the features can be searched easily by a search box in the top right.
 9. User can login and logout by clicking the dropdown at top right corner.
 10. Login is made as guided in the problem statement.
+11. Event page can be viewed by clicking view in the events card.
+
 
 
 ---
